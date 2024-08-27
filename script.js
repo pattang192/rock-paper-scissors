@@ -20,4 +20,26 @@ function getComputerChoice(randomNumber) {
 }
 console.log(getComputerChoice(randomNumber));
 
+let humanChoice = prompt("Type your choice of rock, paper or scissors here:");
+humanChoice = humanChoice.toLowerCase();
+console.log(humanChoice);
+function getHumanChoice(humanChoice) {
+    if (humanChoice === "rock") {
+        return "ROCK!";
+    }
+    else if (humanChoice === "paper") {
+        return "PAPER!"
+    }
+    else if (humanChoice === "scissors") {
+        return "SCISSORS!"
+    }
+    else if (humanChoice === "") {
+        return "Uh oh, you forgot to choose!"
+    }
+    else {
+        return "That doesn't look like an option..."
+    }
+}
+console.log(getHumanChoice(humanChoice));
+
 
