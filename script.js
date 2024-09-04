@@ -1,13 +1,9 @@
-/*Create a variable to store computer's choice of a random number from 1 to 10
-Create a function to get computer choice of rock paper scissors using math random function
+/*Create a function that determines computer choice of rock paper scissors using math random function
 Display prompt requesting user's choice
 Display message stating the user's choice of rock paper or scissors, else return error message.
 Create functions to keep track of players scores
+For loop that plays five rounds and declares winner of each round and ultimate winner.
 */
-
-
-
-
 function getComputerChoice() {
     let num = Math.random();
 
@@ -91,6 +87,5 @@ function playGame() {
         else if (humanScore === computerScore) {
             console.log("It's a draw!")
         }
-
     }
 playGame();
