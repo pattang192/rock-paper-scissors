@@ -4,6 +4,11 @@ Display message stating the user's choice of rock paper or scissors, else return
 Create functions to keep track of players scores
 For loop that plays five rounds and declares winner of each round and ultimate winner.
 */
+let humanScore = 0;
+let computerScore = 0;
+const buttons = document.querySelectorAll("button");
+let humanChoice = "";
+
 function getComputerChoice() {
     let num = Math.random();
 
@@ -18,22 +23,8 @@ function getComputerChoice() {
     }
 }
 
-function getHumanChoice() {
-    let humanChoice =(prompt("Type your choice of rock, paper or scissors here:")).toLowerCase();
-        
-    if (humanChoice === "rock" || humanChoice === "paper" || humanChoice === "scissors") {
-        return humanChoice;
-    }
-        else {
-        return "Please enter a valid option."
-    }
-}
-
-let humanScore = 0;
-let computerScore = 0;
-
-
 function playRound(humanChoice, computerChoice) {
+        
         if (humanChoice === "scissors" && computerChoice === "rock"){
             ++computerScore;
             return "You lose! Rock beats Scissors.";
@@ -61,22 +52,23 @@ function playRound(humanChoice, computerChoice) {
             else if (humanChoice === computerChoice) {
                 return "It's a tie."
             }
-            else {
-                console.log("Invalid input. Try again.")
-                return (playRound(getHumanChoice(),getComputerChoice()));
-            }                
-    }
+        }
+
 
 function playGame() {
-    for(i=1; i<=5; i++) {
-            console.log(`\nRound ${i}`);
-
-            let humanSelection = getHumanChoice();
+    buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+            let humanChoice = button.id;
+            button.id = "";
+            return humanChoice;
+            });
+        }); 
+            let humanSelection = event.target.id;
             let computerSelection = getComputerChoice();
             console.log(`You: ${humanSelection}\nComputer: ${computerSelection}`);
             console.log(playRound(humanSelection, computerSelection));
             console.log(`Your score: ${humanScore}\nComputer score: ${computerScore}`);
-        }
+        
        
         if (humanScore > computerScore) {
             console.log("Congrats! You win!");
@@ -88,4 +80,7 @@ function playGame() {
             console.log("It's a draw!")
         }
     }
-playGame();
+
+    buttons.forEach((button) => {
+        button.addEventListener('click', playGame)
+    } )
