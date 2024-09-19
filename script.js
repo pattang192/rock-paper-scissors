@@ -7,7 +7,6 @@ For loop that plays five rounds and declares winner of each round and ultimate w
 let humanScore = 0;
 let computerScore = 0;
 const buttons = document.querySelectorAll("button");
-let humanChoice = "";
 
 function getComputerChoice() {
     let num = Math.random();
@@ -24,7 +23,12 @@ function getComputerChoice() {
 }
 
 function playRound(humanChoice, computerChoice) {
-        
+    buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+            let humanChoice = event.target.id;
+            return humanChoice;
+            });
+        }); 
         if (humanChoice === "scissors" && computerChoice === "rock"){
             ++computerScore;
             return "You lose! Rock beats Scissors.";
@@ -50,36 +54,33 @@ function playRound(humanChoice, computerChoice) {
                 return "You win! Rock beats Scissors.";
             }
             else if (humanChoice === computerChoice) {
+                ++humanScore;
+                ++computerScore;
                 return "It's a tie."
             }
         }
 
 
 function playGame() {
-    buttons.forEach((button) => {
-        button.addEventListener('click', () => {
-            let humanChoice = button.id;
-            button.id = "";
-            return humanChoice;
-            });
-        }); 
             let humanSelection = event.target.id;
             let computerSelection = getComputerChoice();
-            console.log(`You: ${humanSelection}\nComputer: ${computerSelection}`);
-            console.log(playRound(humanSelection, computerSelection));
-            console.log(`Your score: ${humanScore}\nComputer score: ${computerScore}`);
-        
+
+            const results = document.querySelectorAll("div p")
+            selections.textContent = `You: ${humanSelection}\nComputer: ${computerSelection}`;
+            roundResult.textContent = `${playRound(humanSelection, computerSelection)}`;
+            score.textContent = `Your score: ${humanScore}\nComputer score: ${computerScore}`;
+}
        
-        if (humanScore > computerScore) {
-            console.log("Congrats! You win!");
+        if (humanScore === 5 && computerScore === 5) {
+            gameResult.textContent = "It's a draw!";
         }
-        else if (humanScore < computerScore) {
-            console.log("Sorry, you lost.")
+        else if (computerScore === 5) {
+            gameResult.textContent = "Sorry, you lost the game.";
         }
-        else if (humanScore === computerScore) {
-            console.log("It's a draw!")
+        else if (humanScore === 5) {
+        gameResult.textContent = "Congrats! You won the game!";
         }
-    }
+    
 
     buttons.forEach((button) => {
         button.addEventListener('click', playGame)
