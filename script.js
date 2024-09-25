@@ -91,8 +91,4 @@ function playRound(humanChoice, computerChoice) {
 
     buttons.forEach((button) => {
         button.addEventListener('click', playGame)
-    } )
-
-    /*
-    
-    */
+    });
