@@ -22,13 +22,42 @@ function getComputerChoice() {
     }
 }
 
+function playGame() {
+    let humanSelection = event.target.id;
+    let computerSelection = getComputerChoice();
+
+            const paras = document.querySelectorAll("div p");
+            selections.textContent = `You: ${humanSelection}\nComputer: ${computerSelection}`;
+            roundResult.textContent = `${playRound(humanSelection, computerSelection)}`;
+            score.textContent = `Your score: ${humanScore}\nComputer score: ${computerScore}`;
+
+            if (computerScore === 5 || humanScore === 5) {
+                gameOver();
+                computerScore = 0;
+                humanScore = 0;
+                }
+}    
+
+function gameOver() {
+    if (humanScore > 4 && computerScore > 4) {
+        gameResult.textContent = "It's a draw!";
+    }
+    else if (computerScore > 4) {
+        gameResult.textContent = "Sorry, you lost the game.";
+    }
+    else if (humanScore > 4) {
+    gameResult.textContent = "Congrats! You won the game!";
+    }
+}
+
 function playRound(humanChoice, computerChoice) {
-    buttons.forEach((button) => {
+        buttons.forEach((button) => {
         button.addEventListener('click', () => {
             let humanChoice = event.target.id;
             return humanChoice;
             });
         }); 
+        
         if (humanChoice === "scissors" && computerChoice === "rock"){
             ++computerScore;
             return "You lose! Rock beats Scissors.";
@@ -57,31 +86,13 @@ function playRound(humanChoice, computerChoice) {
                 ++humanScore;
                 ++computerScore;
                 return "It's a tie."
-            }
-        }
-
-
-function playGame() {
-            let humanSelection = event.target.id;
-            let computerSelection = getComputerChoice();
-
-            const results = document.querySelectorAll("div p")
-            selections.textContent = `You: ${humanSelection}\nComputer: ${computerSelection}`;
-            roundResult.textContent = `${playRound(humanSelection, computerSelection)}`;
-            score.textContent = `Your score: ${humanScore}\nComputer score: ${computerScore}`;
-}
-       
-        if (humanScore === 5 && computerScore === 5) {
-            gameResult.textContent = "It's a draw!";
-        }
-        else if (computerScore === 5) {
-            gameResult.textContent = "Sorry, you lost the game.";
-        }
-        else if (humanScore === 5) {
-        gameResult.textContent = "Congrats! You won the game!";
-        }
-    
+            }       
+}    
 
     buttons.forEach((button) => {
         button.addEventListener('click', playGame)
     } )
+
+    /*
+    
+    */
